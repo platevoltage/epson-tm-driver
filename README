@@ -1,3 +1,11 @@
+# Fork of the Epson TM Series Printer Driver for Linux
+
+This is mostly unchanged from Epson's version but I've removed the FeedPaper()
+call after cutting the paper to avoid spooling infinite paper at the end of a 
+job.
+
+
+### Orginal README from Epson
 
   EPSON TM Series Printer Driver for Linux Version 3.0.0
 
