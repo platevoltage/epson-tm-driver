@@ -646,8 +646,8 @@ static int EndJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo, cups_pa
 			result = WriteData( Command, sizeof(Command) );
 			if ( EPTMD_SUCCESS != result ) { return 2202; }
 			
-			result = FeedPaper( p_config, p_header, ((p_config->v_motionUnit * 10) / 254) );
-			if ( EPTMD_SUCCESS != result ) { return 2203; }
+			//result = FeedPaper( p_config, p_header, ((p_config->v_motionUnit * 10) / 254) );
+			//if ( EPTMD_SUCCESS != result ) { return 2203; }
 			break;
 		
 		default:
