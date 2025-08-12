@@ -560,7 +560,7 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 		if ( EPTMD_SUCCESS != result ) { return 2105; }
 
 		// *** Set print speed to fastest ***
-		unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 0x02, 0x00, 50, 17 }; 
+		unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 0x02, 0x00, 48, 1 }; 
 		result = WriteData(CommandSetPrintSpeed, sizeof(CommandSetPrintSpeed));
 		if (EPTMD_SUCCESS != result) { return 2106; }
 
