@@ -561,7 +561,7 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 
 		// Set print density to a lower value for faster printing (e.g., 20)
 		// Example, add after other ESC/GS commands
-		unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 2, 0, 50, 10 }; // 10 = medium fast speed
+		unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 2, 0, 50, 17 }; // 10 = medium fast speed
 		result = WriteData(CommandSetPrintSpeed, sizeof(CommandSetPrintSpeed));
 		if (EPTMD_SUCCESS != result) { return 2106; }
 
