@@ -559,6 +559,12 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 		result = WriteData( CommandSetBaseMotionUnit, sizeof(CommandSetBaseMotionUnit) );
 		if ( EPTMD_SUCCESS != result ) { return 2105; }
 
+		// Set print density to a lower value for faster printing (e.g., 20)
+		unsigned char CommandSetPrintDensity[3] = { ESC, 'K', 8 };
+		result = WriteData(CommandSetPrintDensity, sizeof(CommandSetPrintDensity));
+		if (EPTMD_SUCCESS != result) { return 2106; }  // Replace 210X with appropriate error code
+
+
 
 	}
 	
