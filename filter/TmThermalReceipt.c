@@ -537,9 +537,6 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 	}
 	
 	{ // Write configuration commands.
-		unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 2, 0, 48, 52 }; // 10 = medium fast speed
-		result = WriteData(CommandSetPrintSpeed, sizeof(CommandSetPrintSpeed));
-		if (EPTMD_SUCCESS != result) { return 2100; }
 
 
 		unsigned char CommandSetDevice[3+2] = { ESC, '=', 0x01, ESC, '@' };
