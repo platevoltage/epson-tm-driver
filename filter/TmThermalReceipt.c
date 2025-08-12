@@ -239,7 +239,7 @@ static int Init(int argc, char *argv[], EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO
 	
 	// Get printer name.
 	p_config->p_printerName = argv[0];
-	p_config->maxBandLines  = 1024;
+	p_config->maxBandLines  = 256;
 	
 	return EPTMD_SUCCESS;
 }
@@ -537,8 +537,6 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 	}
 	
 	{ // Write configuration commands.
-
-
 		unsigned char CommandSetDevice[3+2] = { ESC, '=', 0x01, ESC, '@' };
 		result = WriteData( CommandSetDevice, sizeof(CommandSetDevice) );
 		if ( EPTMD_SUCCESS != result ) { return 2101; }
@@ -560,7 +558,6 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 		CommandSetBaseMotionUnit[3] = p_config->v_motionUnit;
 		result = WriteData( CommandSetBaseMotionUnit, sizeof(CommandSetBaseMotionUnit) );
 		if ( EPTMD_SUCCESS != result ) { return 2105; }
-
 	}
 	
 	// Drawer open.
@@ -910,8 +907,7 @@ static unsigned FindBlackRasterLineEnd(cups_page_header_t* p_header, unsigned ch
 static int WriteBand(cups_page_header_t* p_header, unsigned char *p_data, unsigned lines)
 {
 	int result = EPTMD_SUCCESS;
-
-
+	
 	unsigned char CommandSetAbsolutePrintPosition[4]= { ESC, '$', 0, 0 };
 	result = WriteData( CommandSetAbsolutePrintPosition, sizeof(CommandSetAbsolutePrintPosition) );
 	if ( EPTMD_SUCCESS != result ) { return result; }
@@ -930,9 +926,8 @@ static int WriteBand(cups_page_header_t* p_header, unsigned char *p_data, unsign
 	if ( EPTMD_SUCCESS != result ) { return result; }
     result = WriteData( p_data, (unsigned int)(EPTMD_BITS_TO_BYTES(width) * lines) );
 	if ( EPTMD_SUCCESS != result ) { return result; }
-
 	
-	unsigned char CommandSetGraphicsdataGSpL50[7] = { GS, '(', 'L', 2, 0, 48, 48 };
+	unsigned char CommandSetGraphicsdataGSpL50[7] = { GS, '(', 'L', 2, 0, 48, 50 };
 	result = WriteData( CommandSetGraphicsdataGSpL50, sizeof(CommandSetGraphicsdataGSpL50) );
 	if ( EPTMD_SUCCESS != result ) { return result; }
 	
