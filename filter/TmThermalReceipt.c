@@ -558,6 +558,14 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 		CommandSetBaseMotionUnit[3] = p_config->v_motionUnit;
 		result = WriteData( CommandSetBaseMotionUnit, sizeof(CommandSetBaseMotionUnit) );
 		if ( EPTMD_SUCCESS != result ) { return 2105; }
+
+		// *** Set print speed to fastest ***
+		unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 0x02, 0x00, 50, 17 }; 
+		result = WriteData(CommandSetPrintSpeed, sizeof(CommandSetPrintSpeed));
+		if (EPTMD_SUCCESS != result) { return 2106; }
+
+
+		
 	}
 	
 	// Drawer open.
