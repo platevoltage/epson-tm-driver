@@ -559,6 +559,12 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 		result = WriteData( CommandSetBaseMotionUnit, sizeof(CommandSetBaseMotionUnit) );
 		if ( EPTMD_SUCCESS != result ) { return 2105; }
 
+		// Set print density to lower value for faster draft mode
+		unsigned char CommandSetPrintDensity[5] = { ESC, '(', 'U', 1, 0x00 };
+		CommandSetPrintDensity[4] = 30;  // example value, lighter density = faster print
+		result = WriteData(CommandSetPrintDensity, sizeof(CommandSetPrintDensity));
+		if ( EPTMD_SUCCESS != result ) { return 2111; }
+
 	}
 	
 	// Drawer open.
