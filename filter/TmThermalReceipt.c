@@ -559,15 +559,6 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 		result = WriteData( CommandSetBaseMotionUnit, sizeof(CommandSetBaseMotionUnit) );
 		if ( EPTMD_SUCCESS != result ) { return 2105; }
 
-		// Set print density to a lower value for faster printing (e.g., 20)
-		// Example, add after other ESC/GS commands
-		unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 2, 0, 50, 4 }; // 10 = medium fast speed
-		result = WriteData(CommandSetPrintSpeed, sizeof(CommandSetPrintSpeed));
-		if (EPTMD_SUCCESS != result) { return 2106; }
-
-
-
-
 	}
 	
 	// Drawer open.
@@ -936,6 +927,10 @@ static int WriteBand(cups_page_header_t* p_header, unsigned char *p_data, unsign
 	if ( EPTMD_SUCCESS != result ) { return result; }
     result = WriteData( p_data, (unsigned int)(EPTMD_BITS_TO_BYTES(width) * lines) );
 	if ( EPTMD_SUCCESS != result ) { return result; }
+
+	unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 2, 0, 50, 4 }; // 10 = medium fast speed
+	result = WriteData(CommandSetPrintSpeed, sizeof(CommandSetPrintSpeed));
+	if (EPTMD_SUCCESS != result) { return result; }
 	
 	unsigned char CommandSetGraphicsdataGSpL50[7] = { GS, '(', 'L', 2, 0, 48, 50 };
 	result = WriteData( CommandSetGraphicsdataGSpL50, sizeof(CommandSetGraphicsdataGSpL50) );
