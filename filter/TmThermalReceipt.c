@@ -928,7 +928,7 @@ static int WriteBand(cups_page_header_t* p_header, unsigned char *p_data, unsign
     result = WriteData( p_data, (unsigned int)(EPTMD_BITS_TO_BYTES(width) * lines) );
 	if ( EPTMD_SUCCESS != result ) { return result; }
 
-	unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 2, 0, 50, 57 }; // 10 = medium fast speed
+	unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 2, 0, 48, 52 }; // 10 = medium fast speed
 	result = WriteData(CommandSetPrintSpeed, sizeof(CommandSetPrintSpeed));
 	if (EPTMD_SUCCESS != result) { return result; }
 	
