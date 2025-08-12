@@ -560,9 +560,11 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 		if ( EPTMD_SUCCESS != result ) { return 2105; }
 
 		// Set print density to a lower value for faster printing (e.g., 20)
-		unsigned char CommandSetPrintDensity[3] = { ESC, 'K', 8 };
-		result = WriteData(CommandSetPrintDensity, sizeof(CommandSetPrintDensity));
-		if (EPTMD_SUCCESS != result) { return 2106; }  // Replace 210X with appropriate error code
+		// Example, add after other ESC/GS commands
+		unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 2, 0, 50, 10 }; // 10 = medium fast speed
+		result = WriteData(CommandSetPrintSpeed, sizeof(CommandSetPrintSpeed));
+		if (EPTMD_SUCCESS != result) { return 2106; }
+
 
 
 
