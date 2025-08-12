@@ -559,10 +559,6 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 		result = WriteData( CommandSetBaseMotionUnit, sizeof(CommandSetBaseMotionUnit) );
 		if ( EPTMD_SUCCESS != result ) { return 2105; }
 
-		// Insert ESC 7 to set heat/time (speed vs quality)
-		unsigned char CommandSetPrintDensity[5] = { ESC, '7', 0xFF, 0x80, 0x80 };
-		result = WriteData(CommandSetPrintDensity, sizeof(CommandSetPrintDensity));
-		if ( EPTMD_SUCCESS != result ) { return 2109; }
 	}
 	
 	// Drawer open.
