@@ -537,18 +537,10 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 	}
 	
 	{ // Write configuration commands.
-
-		// *** Set print speed to fastest ***
-		
-		
 		unsigned char CommandSetDevice[3+2] = { ESC, '=', 0x01, ESC, '@' };
 		result = WriteData( CommandSetDevice, sizeof(CommandSetDevice) );
 		if ( EPTMD_SUCCESS != result ) { return 2101; }
 		
-		unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 0x02, 0x00, 50, 4 }; 
-		WriteData(CommandSetPrintSpeed, sizeof(CommandSetPrintSpeed));
-		
-
 		unsigned char CommandSetPrintSheet[4] = { ESC, 'c', '0', 0x02 };
 		result = WriteData( CommandSetPrintSheet, sizeof(CommandSetPrintSheet) );
 		if ( EPTMD_SUCCESS != result ) { return 2102; }
@@ -566,7 +558,6 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 		CommandSetBaseMotionUnit[3] = p_config->v_motionUnit;
 		result = WriteData( CommandSetBaseMotionUnit, sizeof(CommandSetBaseMotionUnit) );
 		if ( EPTMD_SUCCESS != result ) { return 2105; }
-		
 	}
 	
 	// Drawer open.
@@ -939,7 +930,6 @@ static int WriteBand(cups_page_header_t* p_header, unsigned char *p_data, unsign
 	unsigned char CommandSetGraphicsdataGSpL50[7] = { GS, '(', 'L', 2, 0, 48, 50 };
 	result = WriteData( CommandSetGraphicsdataGSpL50, sizeof(CommandSetGraphicsdataGSpL50) );
 	if ( EPTMD_SUCCESS != result ) { return result; }
-
 	
 	return EPTMD_SUCCESS;
 }
