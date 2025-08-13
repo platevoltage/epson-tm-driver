@@ -239,7 +239,7 @@ static int Init(int argc, char *argv[], EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO
 	
 	// Get printer name.
 	p_config->p_printerName = argv[0];
-	p_config->maxBandLines  = 10;
+	p_config->maxBandLines  = 1024;
 	
 	return EPTMD_SUCCESS;
 }
