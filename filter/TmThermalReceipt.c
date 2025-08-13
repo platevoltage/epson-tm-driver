@@ -545,9 +545,9 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 		result = WriteData( CommandSetDevice, sizeof(CommandSetDevice) );
 		if ( EPTMD_SUCCESS != result ) { return 2101; }
 		
-		unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 0x02, 0x00, 50, 10 }; 
-		result = WriteData(CommandSetPrintSpeed, sizeof(CommandSetPrintSpeed));
-		if (EPTMD_SUCCESS != result) { return 2101; }
+		unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 0x02, 0x00, 50, 4 }; 
+		WriteData(CommandSetPrintSpeed, sizeof(CommandSetPrintSpeed));
+		
 
 		unsigned char CommandSetPrintSheet[4] = { ESC, 'c', '0', 0x02 };
 		result = WriteData( CommandSetPrintSheet, sizeof(CommandSetPrintSheet) );
@@ -935,9 +935,6 @@ static int WriteBand(cups_page_header_t* p_header, unsigned char *p_data, unsign
 	if ( EPTMD_SUCCESS != result ) { return result; }
     result = WriteData( p_data, (unsigned int)(EPTMD_BITS_TO_BYTES(width) * lines) );
 	if ( EPTMD_SUCCESS != result ) { return result; }
-	unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 0x02, 0x00, 50, 10 }; 
-	result = WriteData(CommandSetPrintSpeed, sizeof(CommandSetPrintSpeed));
-	if (EPTMD_SUCCESS != result) { return result; }
 	
 	unsigned char CommandSetGraphicsdataGSpL50[7] = { GS, '(', 'L', 2, 0, 48, 50 };
 	result = WriteData( CommandSetGraphicsdataGSpL50, sizeof(CommandSetGraphicsdataGSpL50) );
