@@ -83,7 +83,7 @@
 
 *% Horizontal and Vertical motion units.
 *TmxMotionUnitHori: "180"
-*TmxMotionUnitVert: "50"
+*TmxMotionUnitVert: "180"
 
 *% Paper reduction settings.
 *OpenUI *TmxPaperReduction/Paper Reduction: PickOne
