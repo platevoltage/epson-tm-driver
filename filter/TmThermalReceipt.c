@@ -547,8 +547,8 @@ static int StartJob(EPTMS_CONFIG_T* p_config, EPTMS_JOB_INFO_T* p_jobInfo)
 		
 		unsigned char CommandSetPrintSpeed[7] = { GS, '(', 'K', 0x02, 0x00, 50, 10 }; 
 		result = WriteData(CommandSetPrintSpeed, sizeof(CommandSetPrintSpeed));
-		if (EPTMD_SUCCESS != result) { return 2106; }
-		
+		if (EPTMD_SUCCESS != result) { return 2101; }
+
 		unsigned char CommandSetPrintSheet[4] = { ESC, 'c', '0', 0x02 };
 		result = WriteData( CommandSetPrintSheet, sizeof(CommandSetPrintSheet) );
 		if ( EPTMD_SUCCESS != result ) { return 2102; }
